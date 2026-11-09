@@ -2,3 +2,6 @@
 *.gz binary
 *.png binary
 *.zip binary
+*.svg -whitespace
+artifacts/** linguist-generated=true
+demo/index.html linguist-generated=true

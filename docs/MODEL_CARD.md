@@ -1,7 +1,9 @@
 # Model card
 
-**Version:** 0.1.0  
-**Purpose:** research and portfolio demonstration of anomaly monitoring and alarm evaluation.  
+**Version:** 0.1.0
+
+**Purpose:** research and portfolio demonstration of anomaly monitoring and alarm evaluation.
+
 **Authoring:** substantial AI-assisted initial implementation; see [authorship note](../AI_ASSISTANCE.md).
 
 ## Inputs and outputs
