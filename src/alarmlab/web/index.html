@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>AlarmLab — Human-centred anomaly monitoring</title>
+  <!--STYLE-->
+</head>
+<body>
+<div class="shell">
+  <div class="workspace">
+    <header class="topbar">
+      <a href="#" class="brand" aria-label="AlarmLab start"><span>FORSØKSPROTOKOLL</span><b>AlarmLab</b></a>
+      <div class="top-meta"><span class="live-dot"></span> LOKAL KOPI <span class="version">v0.1</span></div>
+    </header>
+    <main>
+      <section class="intro">
+        <div><p class="eyebrow">MASKINLÆRING / TIDSSERIER / ALARMEVALUERING</p><h1>Avviksdeteksjon i sensordata</h1>
+          <p class="lead">Sammenlign tre detektorer, undersøk alarmforløpet og kontroller resultatene mot de lagrede målingene.</p></div>
+        <div class="intro-note"><span class="tiny-label">FORMÅL</span><p>Undersøke hvordan modellvalg, sensorfeil og alarmens tidslogikk påvirker oppdagelse og falske varsler.</p><span class="intro-tag">TO DATASETT · SEPARATE EKSPERIMENTER</span></div>
+      </section>
+      <nav class="tabs" aria-label="Visning">
+        <button class="tab active" data-tab="operator" aria-pressed="true">01 <span>Operatørvisning</span></button>
+        <button class="tab" data-tab="results" aria-pressed="false">02 <span>Eksperimenter</span></button>
+        <button class="tab" data-tab="real" aria-pressed="false">03 <span>Ekte sensordata</span></button>
+        <button class="tab" data-tab="method" aria-pressed="false">04 <span>Metode & relevans</span></button>
+      </nav>
+      <div class="dataset-strip"><span class="small-square"></span><span id="data-mode">Simulert, generisk kjølekrets · avspilling av beregnede modellresultater</span><span class="strip-right">INGEN TILKOBLING TIL ET ANLEGG</span></div>
+
+      <section id="operator" class="view active" aria-label="Operatørvisning">
+        <div class="controls card">
+          <label>Scenario<select id="scenario"><option value="pump_wear">Gradvis pumpesvekkelse</option><option value="cooling_loss">Redusert kjøling</option><option value="sensor_bias">Temperatursensor med bias</option><option value="normal">Normal drift</option><option value="load_step">Legitimt lastskifte</option><option value="dropout">Manglende målinger</option><option value="stuck_sensor">Frosset flowsensor</option></select></label>
+          <label>Testforhold<select id="domain"><option value="in_domain">Kjente driftsforhold</option><option value="noise_shift">Stress: 3× sensorstøy</option><option value="context_shift">Stress: omgivelse +12 °C</option></select></label>
+          <label>Modell<select id="model"><option value="contextual_residual">Kontekstuell residualmodell</option><option value="isolation_forest">Isolation Forest</option><option value="raw_limits">Robuste sensorgrenser</option></select></label>
+        </div>
+        <div class="monitor-grid">
+          <div class="monitor-main">
+            <div class="card process-card">
+              <div class="card-top"><div><p class="tiny-label">PROSESSOVERSIKT</p><h2>Generisk kjølekrets</h2></div><span class="badge neutral" id="run-id">—</span></div>
+              <div class="process-layout">
+                <svg class="process-svg" viewBox="0 0 540 140" role="img" aria-label="Skjematisk kjølekrets med varmebelastning, pumpe og varmeveksler">
+                  <path d="M80 72 H220 M280 72 H440 V118 H80 V100" fill="none" stroke="#858073" stroke-width="3"/>
+                  <path d="M144 67 L153 72 L144 77 M357 67 L366 72 L357 77 M300 113 L291 118 L300 123" fill="none" stroke="#2e6458" stroke-width="2"/>
+                  <rect x="50" y="42" width="60" height="60" rx="12" fill="#f1eee3" stroke="#827d6f"/>
+                  <path d="M69 82 V60 M80 82 V60 M91 82 V60" stroke="#405b82" stroke-width="3"/>
+                  <circle cx="250" cy="72" r="30" fill="#f1eee3" stroke="#2e6458"/><path d="M239 55 L267 72 L239 89 Z" fill="none" stroke="#2e6458" stroke-width="2"/>
+                  <rect x="408" y="45" width="64" height="54" rx="10" fill="#f1eee3" stroke="#827d6f"/>
+                  <path d="M419 55 L432 88 L444 55 L458 88" stroke="#2e6458" stroke-width="2" fill="none"/>
+                  <text x="80" y="25" text-anchor="middle">VARMELAST</text><text x="250" y="25" text-anchor="middle">PUMPE</text><text x="440" y="25" text-anchor="middle">KJØLING</text>
+                </svg>
+                <div class="context-info"><span>Belastning <b id="heat-value">—</b></span><span>Pumpekommando <b id="pump-value">—</b></span><span>Omgivelse <b id="ambient-value">—</b></span></div>
+              </div>
+              <div class="sensor-cards" id="sensor-cards"></div>
+            </div>
+            <div class="card chart-card">
+              <div class="card-top"><div><p class="tiny-label">MÅLING OG MODELLFORVENTNING</p><h2 id="signal-title">Temperatur</h2></div><div class="legend"><span class="legend-measured">Målt</span><span class="legend-expected">Forventet</span></div></div>
+              <svg id="signal-chart" class="chart" viewBox="0 0 800 235" role="img" aria-label="Sensorverdi og forventet verdi frem til valgt tidspunkt"></svg>
+              <div class="score-caption"><span>Avviksskår / alarmterskel</span><span id="score-value">—</span></div>
+              <svg id="score-chart" class="score-chart" viewBox="0 0 800 118" role="img" aria-label="Normalisert avviksskår og alarmterskel"></svg>
+              <div class="transport">
+                <button id="restart" class="icon-btn" aria-label="Start avspillingen fra begynnelsen">↶</button>
+                <button id="play" class="primary">Spill av</button>
+                <label class="timeline"><span class="sr-only">Tid i scenariet</span><input type="range" id="time" min="0" max="599" value="350"></label>
+                <output id="time-label">00:00</output><span class="speed">20×</span>
+              </div>
+              <label class="truth-toggle"><input type="checkbox" id="truth"> Vis fasit for læring og evaluering</label><p id="truth-caption" class="muted" hidden></p>
+            </div>
+          </div>
+          <aside class="insight-column">
+            <div class="card decision-card">
+              <p class="tiny-label">MODELLENS STATUS NÅ</p>
+              <div id="status" class="status alarm"><span class="status-dot"></span><strong>—</strong></div>
+              <p id="status-copy" class="status-copy"></p>
+              <div class="mini-stat"><span>Empirisk halerang</span><b id="tail-value">—</b></div>
+              <p class="micro">Sjeldenhet mot normale kalibreringsdata. Dette er ikke sannsynligheten for feil.</p>
+              <div class="divider"></div>
+              <p class="tiny-label">SIGNALER SOM AVVIKER MEST</p>
+              <div id="explanations"></div>
+              <p id="explanation-note" class="micro"></p>
+            </div>
+            <div class="card decision-log">
+              <p class="tiny-label">MENNESKETS VURDERING</p><h2>Vurderingsnotat</h2>
+              <p class="muted">Øv på å vurdere signalene. Loggen lagres i denne nettleseren.</p>
+              <label class="sr-only" for="decision">Vurdering</label><select id="decision"><option>Undersøk prosessavvik</option><option>Undersøk datakvalitet</option><option>Avvent og følg med</option><option>Utilstrekkelig grunnlag</option></select>
+              <label class="sr-only" for="note">Begrunnelse</label><textarea id="note" rows="2" maxlength="500" placeholder="Hva bygger du vurderingen på?"></textarea>
+              <button id="log" class="secondary full">Loggfør vurdering</button>
+              <p id="log-message" class="micro" role="status">Ingen vurderinger i denne økten.</p>
+              <button id="export-log" class="text-button">Eksporter øvelseslogg ↓</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="results" class="view" aria-label="Eksperimentresultater" hidden>
+        <div class="section-heading"><div><p class="tiny-label">REPRODUSERBARE EKSPERIMENTER</p><h2>Resultater fra simulerte kjøringer</h2></div><label>Testutvalg<select id="results-domain"><option value="in_domain">Kjente driftsforhold</option><option value="noise_shift">3× sensorstøy</option><option value="context_shift">Omgivelse +12 °C</option></select></label></div>
+        <div class="metric-grid" id="metrics"></div>
+        <div class="card table-card"><h3>Sammenligning av metoder</h3><div class="table-scroll"><table id="results-table"></table></div><p class="micro">Forsinkelse gjelder oppdagede hendelser. En hendelse krever en ny alarm etter feilstart. Falske alarmer telles per overvåket normaltime.</p></div>
+        <div class="two-col">
+          <div class="card"><p class="tiny-label">STRESSTEST</p><h3>Endret støy og driftskontekst</h3><p>Ved kraftig økt støy kan residualmodellen bli stående i alarm før et nytt avvik oppstår. Da oppdager den ingen nye hendelser med vår strenge definisjon. Det er en dokumentert svakhet.</p><p>Ved ukjent driftskontekst avstår systemet fra vurdering. Dette vises som manglende dekning og teller som oversette feil i ende-til-ende-evalueringen.</p></div>
+          <div class="card"><p class="tiny-label">ALARMUTFORMING</p><h3>Tidslogikk og hysterese</h3><p>Alarmen krever tre sammenhengende overskridelser. Den avsluttes etter fem målinger under 80 % av terskelen. Terskelen kommer fra et eget kalibreringssett.</p><div id="ablation"></div><p class="micro">Sammenligningen endrer kun alarmens tidslogikk. Terskelen er uendret.</p></div>
+        </div>
+        <div class="card table-card"><h3>Hendelser fordelt på scenario · residualmodellen</h3><div class="table-scroll"><table id="scenario-table"></table></div></div>
+      </section>
+
+      <section id="real" class="view" aria-label="Ekte sensordata" hidden>
+        <div class="section-heading"><div><p class="tiny-label">UCI 447 · HYDRAULISK TESTRIGG</p><h2>Klassifikasjon av målte hydraulikkdata</h2></div><a class="secondary link-btn" href="https://doi.org/10.24432/C5CW21" target="_blank" rel="noopener">Åpne datakilden ↗</a></div>
+        <div class="metric-grid" id="real-metrics"></div>
+        <div class="card table-card"><div class="card-top"><h3>Klassifikasjon på holdt-utenfor driftskombinasjoner</h3><label>Oppgave<select id="real-task"><option value="cooler_degradation">Kjølertilstand</option><option value="pump_leakage">Pumpelekkasje · utforskende</option></select></label></div><div class="table-scroll"><table id="real-table"></table></div><p class="micro">Klassegrense 0,5. Intervallene er bootstrap på hele driftskombinasjoner. Modellen gir ikke kalibrerte feilsannsynligheter.</p></div>
+        <div class="two-col">
+          <div class="card"><p class="tiny-label">VALG SOM BESKYTTER EVALUERINGEN</p><h3>Samme driftskombinasjon krysser aldri delingen.</h3><p>Hver gruppe består av kjølertilstand, ventiltilstand, pumpelekkasje og akkumulatortrykk. Gruppen brukes til datadeling, og tilstandsetikettene holdes utenfor modellens input.</p><p>Modellen får 36 egenskaper fra ni fysiske sensorer. Virtuelle effektivitetsmål er utelatt.</p></div>
+          <div class="card amber-card"><p class="tiny-label">TOLKNING</p><h3>Begrensninger ved testgrunnlaget</h3><p>Kjølertilstanden er lett å skille på denne riggen. Testen dekker ett anlegg, og gruppeinndelingen garanterer ikke uavhengige måleøkter. Et perfekt observert resultat gir ingen garanti for nye anlegg.</p><p>Pumpelekkasje er lagt til som en utforskende oppgave. Denne separate klassifikasjonstesten validerer ikke simulatorens avviksdetektor.</p></div>
+        </div>
+      </section>
+
+      <section id="method" class="view" aria-label="Metode og relevans" hidden>
+        <div class="section-heading"><div><p class="tiny-label">FRA MEDISINSK DATA SCIENCE TIL INDUSTRIELL KI</p><h2>Metode og faglig sammenheng</h2></div></div>
+        <div class="pipeline"><div><b>01</b><h3>Datagrunnlag</h3><p>Uavhengige simuleringskjøringer og et eget datasett med reelle målinger.</p></div><div><b>02</b><h3>Normalmodell</h3><p>Lær sammenhengen mellom driftskontekst og sensorsignaler.</p></div><div><b>03</b><h3>Kalibrering</h3><p>Sett terskler på egne normale kjøringer. Ingen justering mot testfeil.</p></div><div><b>04</b><h3>Vurdering</h3><p>Vis avvik, datakvalitet og begrensninger. Loggfør menneskets vurdering.</p></div></div>
+        <div class="two-col">
+          <div class="card"><p class="tiny-label">FAGLIG OVERFØRING</p><h3>Overførbare metodevalg</h3><ul class="clean-list"><li>Pasientnivå i datadeling → hele driftskjøringer i datadeling.</li><li>Fysiologiske tidsserier → industrielle sensortidsserier.</li><li>Falske kliniske varsler → alarmbelastning for operatører.</li><li>Datasettforskyvning → endret støy og driftskontekst.</li><li>Beslutningsstøtte → mennesket vurderer modellens observasjoner.</li></ul><p class="micro">Metodene kan overføres. Modeller, kliniske terskler og dokumentert ytelse kan ikke overføres uten ny validering.</p></div>
+          <div class="card"><p class="tiny-label">RELEVANS FOR IFE</p><h3>ADS med koblinger til CRI og SAF-R.</h3><p>Tilstandsovervåking og anvendt maskinlæring knytter prosjektet til Anvendt datavitenskap. Alarmvisning og planlagt brukerstudie knytter det til kontrollrom og menneskelige faktorer.</p><p>Dette er et selvstendig porteføljeprosjekt inspirert av offentlige fagbeskrivelser. Det bruker ingen IFE-data og er ikke utviklet eller validert av IFE.</p><a href="https://ife.no/en/field/applied-data-science/" target="_blank" rel="noopener">Les IFEs fagbeskrivelse ↗</a></div>
+        </div>
+        <div class="card"><p class="tiny-label">SPORBARHET</p><h3>Kjøringsinformasjon</h3><p id="provenance"></p><p>Demoen er en lokal avspilling av beregnede prediksjoner. Kildekode, datakort, metodebeskrivelse, resultater og en planlagt brukerstudie følger med prosjektmappen. Ingen brukerstudie er gjennomført.</p></div>
+      </section>
+    </main>
+    <footer><span>ALARMLAB · FORSKNINGSPROTOTYPE</span><span>Python / scikit-learn / lokal avspilling</span></footer>
+  </div>
+</div>
+<!--DATA-->
+<!--APP-->
+</body>
+</html>

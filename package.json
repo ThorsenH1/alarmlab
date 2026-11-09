@@ -1,0 +1,12 @@
+{
+  "name": "alarmlab-browser-verification",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Development-only browser checks for the offline AlarmLab replay",
+  "scripts": {
+    "test:browser": "node tests/browser.spec.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0"
+  }
+}

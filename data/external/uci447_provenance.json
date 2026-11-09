@@ -1,0 +1,35 @@
+{
+  "dataset": "Condition monitoring of hydraulic systems",
+  "creators": "Nikolai Helwig, Eliseo Pignanelli, Andreas Schuetze",
+  "doi": "https://doi.org/10.24432/C5CW21",
+  "source_url": "https://archive.ics.uci.edu/static/public/447/condition%2Bmonitoring%2Bof%2Bhydraulic%2Bsystems.zip",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "archive_sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+  "derived_sha256": "87d1b579acd0920f02ded2d38c27aed591fc3dc062824054620f62854477cab3",
+  "rows": 2205,
+  "physical_sensors": [
+    "TS1",
+    "TS2",
+    "TS3",
+    "TS4",
+    "FS1",
+    "FS2",
+    "VS1",
+    "PS1",
+    "PS2"
+  ],
+  "transformation": "Per 60-second cycle: mean, population std, range, linear slope per cycle.",
+  "excluded_from_predictors": [
+    "cooler",
+    "valve",
+    "pump_leakage",
+    "accumulator",
+    "unstable",
+    "cycle_id",
+    "CE",
+    "CP",
+    "SE"
+  ],
+  "data_origin": "Measured hydraulic test-rig data, not nuclear or patient data."
+}

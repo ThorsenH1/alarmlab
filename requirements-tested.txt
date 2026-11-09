@@ -1,0 +1,7 @@
+# Exact versions used for the distributed numerical results, Python 3.13.0.
+# These pin the scientific libraries, not every transitive dependency.
+numpy==2.2.4
+pandas==2.2.3
+scipy==1.17.1
+scikit-learn==1.9.1
+matplotlib==3.10.1

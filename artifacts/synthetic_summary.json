@@ -1,0 +1,414 @@
+{
+  "config": {
+    "seed": 20261109,
+    "steps": 600,
+    "dt_seconds": 2,
+    "warmup_steps": 30,
+    "train_runs": 24,
+    "calibration_runs": 12,
+    "test_repetitions": 8,
+    "shift_repetitions": 4,
+    "alpha": 0.005,
+    "alarm_on_steps": 3,
+    "alarm_off_steps": 5,
+    "release_ratio": 0.8,
+    "bootstrap_repetitions": 400
+  },
+  "summary": [
+    {
+      "domain": "in_domain",
+      "method": "raw_limits",
+      "runs": 56,
+      "process_events": 24,
+      "detected_events": 11,
+      "event_recall": 0.4583333333333333,
+      "event_recall_wilson95": [
+        0.2789133373121099,
+        0.6492513464108051
+      ],
+      "recall_within_120s": 0.2916666666666667,
+      "median_delay_s_detected_only": 64.0,
+      "false_alarm_starts": 10,
+      "normal_monitored_hours": 10.286111111111111,
+      "false_alarms_per_hour": 0.9721847150958682,
+      "normal_alarm_occupancy": 0.05843910342965163,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        0.4247752901408027,
+        1.5932325750503442
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.8270363408521304,
+      "quality_event_recall": 1.0,
+      "scored_samples": 26367,
+      "point_average_precision": 0.6511845920838047
+    },
+    {
+      "domain": "in_domain",
+      "method": "isolation_forest",
+      "runs": 56,
+      "process_events": 24,
+      "detected_events": 11,
+      "event_recall": 0.4583333333333333,
+      "event_recall_wilson95": [
+        0.2789133373121099,
+        0.6492513464108051
+      ],
+      "recall_within_120s": 0.20833333333333334,
+      "median_delay_s_detected_only": 132.0,
+      "false_alarm_starts": 7,
+      "normal_monitored_hours": 10.286111111111111,
+      "false_alarms_per_hour": 0.6805293005671077,
+      "normal_alarm_occupancy": 0.04580070213340534,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        0.19701276820064934,
+        1.2322145960639193
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.8270363408521304,
+      "quality_event_recall": 1.0,
+      "scored_samples": 26367,
+      "point_average_precision": 0.523679590851343
+    },
+    {
+      "domain": "in_domain",
+      "method": "contextual_residual",
+      "runs": 56,
+      "process_events": 24,
+      "detected_events": 24,
+      "event_recall": 1.0,
+      "event_recall_wilson95": [
+        0.8620237953250198,
+        1.0
+      ],
+      "recall_within_120s": 1.0,
+      "median_delay_s_detected_only": 34.0,
+      "false_alarm_starts": 1,
+      "normal_monitored_hours": 10.286111111111111,
+      "false_alarms_per_hour": 0.09721847150958682,
+      "normal_alarm_occupancy": 0.0016203078584931137,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        0.0,
+        0.3144816584601391
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.8270363408521304,
+      "quality_event_recall": 1.0,
+      "scored_samples": 26367,
+      "point_average_precision": 0.9847184523592342
+    },
+    {
+      "domain": "noise_shift",
+      "method": "raw_limits",
+      "runs": 28,
+      "process_events": 12,
+      "detected_events": 7,
+      "event_recall": 0.5833333333333334,
+      "event_recall_wilson95": [
+        0.31951131254954973,
+        0.8067396863412435
+      ],
+      "recall_within_120s": 0.4166666666666667,
+      "median_delay_s_detected_only": 66.0,
+      "false_alarm_starts": 8,
+      "normal_monitored_hours": 5.084444444444444,
+      "false_alarms_per_hour": 1.5734265734265735,
+      "normal_alarm_occupancy": 0.12816870629370627,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        0.4205568126313884,
+        2.828949424485411
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.8237468671679198,
+      "quality_event_recall": 1.0,
+      "scored_samples": 13131,
+      "point_average_precision": 0.6425983313199884
+    },
+    {
+      "domain": "noise_shift",
+      "method": "isolation_forest",
+      "runs": 28,
+      "process_events": 12,
+      "detected_events": 5,
+      "event_recall": 0.4166666666666667,
+      "event_recall_wilson95": [
+        0.19326031365875665,
+        0.6804886874504503
+      ],
+      "recall_within_120s": 0.3333333333333333,
+      "median_delay_s_detected_only": 82.0,
+      "false_alarm_starts": 5,
+      "normal_monitored_hours": 5.084444444444444,
+      "false_alarms_per_hour": 0.9833916083916084,
+      "normal_alarm_occupancy": 0.08238636363636363,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        0.0,
+        2.1343124356940835
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.8237468671679198,
+      "quality_event_recall": 1.0,
+      "scored_samples": 13131,
+      "point_average_precision": 0.4934168901727838
+    },
+    {
+      "domain": "noise_shift",
+      "method": "contextual_residual",
+      "runs": 28,
+      "process_events": 12,
+      "detected_events": 0,
+      "event_recall": 0.0,
+      "event_recall_wilson95": [
+        2.7755575615628914e-17,
+        0.24249400665524085
+      ],
+      "recall_within_120s": 0.0,
+      "median_delay_s_detected_only": null,
+      "false_alarm_starts": 36,
+      "normal_monitored_hours": 5.084444444444444,
+      "false_alarms_per_hour": 7.080419580419581,
+      "normal_alarm_occupancy": 0.9732298951048951,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        5.9605495038837,
+        8.474257130145647
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.8237468671679198,
+      "quality_event_recall": 1.0,
+      "scored_samples": 13131,
+      "point_average_precision": 0.9660733719092879
+    },
+    {
+      "domain": "context_shift",
+      "method": "raw_limits",
+      "runs": 28,
+      "process_events": 12,
+      "detected_events": 0,
+      "event_recall": 0.0,
+      "event_recall_wilson95": [
+        2.7755575615628914e-17,
+        0.24249400665524085
+      ],
+      "recall_within_120s": 0.0,
+      "median_delay_s_detected_only": null,
+      "false_alarm_starts": 0,
+      "normal_monitored_hours": 0.0,
+      "false_alarms_per_hour": null,
+      "normal_alarm_occupancy": null,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        null,
+        null
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.0,
+      "quality_event_recall": 1.0,
+      "scored_samples": 0,
+      "point_average_precision": null
+    },
+    {
+      "domain": "context_shift",
+      "method": "isolation_forest",
+      "runs": 28,
+      "process_events": 12,
+      "detected_events": 0,
+      "event_recall": 0.0,
+      "event_recall_wilson95": [
+        2.7755575615628914e-17,
+        0.24249400665524085
+      ],
+      "recall_within_120s": 0.0,
+      "median_delay_s_detected_only": null,
+      "false_alarm_starts": 0,
+      "normal_monitored_hours": 0.0,
+      "false_alarms_per_hour": null,
+      "normal_alarm_occupancy": null,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        null,
+        null
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.0,
+      "quality_event_recall": 1.0,
+      "scored_samples": 0,
+      "point_average_precision": null
+    },
+    {
+      "domain": "context_shift",
+      "method": "contextual_residual",
+      "runs": 28,
+      "process_events": 12,
+      "detected_events": 0,
+      "event_recall": 0.0,
+      "event_recall_wilson95": [
+        2.7755575615628914e-17,
+        0.24249400665524085
+      ],
+      "recall_within_120s": 0.0,
+      "median_delay_s_detected_only": null,
+      "false_alarm_starts": 0,
+      "normal_monitored_hours": 0.0,
+      "false_alarms_per_hour": null,
+      "normal_alarm_occupancy": null,
+      "false_alarms_per_hour_cluster_bootstrap95": [
+        null,
+        null
+      ],
+      "zero_count_poisson_upper95_per_hour": null,
+      "coverage": 0.0,
+      "quality_event_recall": 1.0,
+      "scored_samples": 0,
+      "point_average_precision": null
+    }
+  ],
+  "persistence_ablation": [
+    {
+      "domain": "in_domain",
+      "method": "raw_limits",
+      "without_persistence_false_starts": 81,
+      "without_persistence_false_starts_per_hour": 7.874696192276533,
+      "with_persistence_false_starts": 10
+    },
+    {
+      "domain": "in_domain",
+      "method": "isolation_forest",
+      "without_persistence_false_starts": 66,
+      "without_persistence_false_starts_per_hour": 6.41641911963273,
+      "with_persistence_false_starts": 7
+    },
+    {
+      "domain": "in_domain",
+      "method": "contextual_residual",
+      "without_persistence_false_starts": 142,
+      "without_persistence_false_starts_per_hour": 13.805022954361329,
+      "with_persistence_false_starts": 1
+    },
+    {
+      "domain": "noise_shift",
+      "method": "raw_limits",
+      "without_persistence_false_starts": 195,
+      "without_persistence_false_starts_per_hour": 38.35227272727273,
+      "with_persistence_false_starts": 8
+    },
+    {
+      "domain": "noise_shift",
+      "method": "isolation_forest",
+      "without_persistence_false_starts": 66,
+      "without_persistence_false_starts_per_hour": 12.980769230769232,
+      "with_persistence_false_starts": 5
+    },
+    {
+      "domain": "noise_shift",
+      "method": "contextual_residual",
+      "without_persistence_false_starts": 2202,
+      "without_persistence_false_starts_per_hour": 433.0856643356643,
+      "with_persistence_false_starts": 36
+    },
+    {
+      "domain": "context_shift",
+      "method": "raw_limits",
+      "without_persistence_false_starts": 0,
+      "without_persistence_false_starts_per_hour": null,
+      "with_persistence_false_starts": 0
+    },
+    {
+      "domain": "context_shift",
+      "method": "isolation_forest",
+      "without_persistence_false_starts": 0,
+      "without_persistence_false_starts_per_hour": null,
+      "with_persistence_false_starts": 0
+    },
+    {
+      "domain": "context_shift",
+      "method": "contextual_residual",
+      "without_persistence_false_starts": 0,
+      "without_persistence_false_starts_per_hour": null,
+      "with_persistence_false_starts": 0
+    }
+  ],
+  "model": {
+    "methods": [
+      "raw_limits",
+      "isolation_forest",
+      "contextual_residual"
+    ],
+    "training_runs": [
+      "train-0000",
+      "train-0001",
+      "train-0002",
+      "train-0003",
+      "train-0004",
+      "train-0005",
+      "train-0006",
+      "train-0007",
+      "train-0008",
+      "train-0009",
+      "train-0010",
+      "train-0011",
+      "train-0012",
+      "train-0013",
+      "train-0014",
+      "train-0015",
+      "train-0016",
+      "train-0017",
+      "train-0018",
+      "train-0019",
+      "train-0020",
+      "train-0021",
+      "train-0022",
+      "train-0023"
+    ],
+    "calibration_runs": [
+      "calibration-0024",
+      "calibration-0025",
+      "calibration-0026",
+      "calibration-0027",
+      "calibration-0028",
+      "calibration-0029",
+      "calibration-0030",
+      "calibration-0031",
+      "calibration-0032",
+      "calibration-0033",
+      "calibration-0034",
+      "calibration-0035"
+    ],
+    "thresholds": {
+      "raw_limits": 2.33245459422007,
+      "isolation_forest": 0.6011245345134479,
+      "contextual_residual": 3.2137221156458557
+    },
+    "residual_scale": {
+      "temperature_c": 0.13462188057518126,
+      "flow_lpm": 0.2782641332977239,
+      "pressure_bar": 0.043750868589067154,
+      "vibration_mm_s": 0.023599563293308055
+    },
+    "context_bounds": {
+      "heat_kw": [
+        30.8626613418798,
+        80.00345350197702
+      ],
+      "pump_pct": [
+        50.29173595011582,
+        93.54147850548446
+      ],
+      "ambient_c": [
+        17.63976478727457,
+        25.45457055978292
+      ]
+    },
+    "calibration_samples": {
+      "raw_limits": 6726,
+      "isolation_forest": 6726,
+      "contextual_residual": 6726
+    },
+    "tail_rank_is_failure_probability": false
+  },
+  "interpretation": {
+    "event_detection": "A new alarm start at or after fault onset; pre-existing alarms do not count.",
+    "false_alarm_exposure": "Monitored normal time only; abstention and warmup excluded.",
+    "delay": "Conditional on detected events. Always read alongside missed events.",
+    "coverage": "Fraction of post-warmup time eligible for model decisions, including fault periods.",
+    "uncertainty": "Wilson intervals for episode recall; episode bootstrap for false alarm rates.",
+    "zero_count": "A zero-event bootstrap [0,0] is not proof of zero risk; a Poisson reference upper bound is also provided.",
+    "synthetic_only": true
+  }
+}

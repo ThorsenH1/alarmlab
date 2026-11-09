@@ -1,0 +1,15 @@
+{
+  "seed": 20261109,
+  "steps": 600,
+  "dt_seconds": 2,
+  "warmup_steps": 30,
+  "train_runs": 24,
+  "calibration_runs": 12,
+  "test_repetitions": 8,
+  "shift_repetitions": 4,
+  "alpha": 0.005,
+  "alarm_on_steps": 3,
+  "alarm_off_steps": 5,
+  "release_ratio": 0.8,
+  "bootstrap_repetitions": 400
+}

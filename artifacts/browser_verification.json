@@ -1,0 +1,23 @@
+{
+  "browser": "158.0.8127.18",
+  "desktop_viewport": [
+    1440,
+    1100
+  ],
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "checks": [
+    "Default trace loads with real precomputed alarm state",
+    "All 63 scenario/domain/model combinations match Python states at t=1000 s",
+    "Missing data suppresses the score; truth overlay is opt-in",
+    "Local human assessment is persisted and exported with data fingerprint",
+    "Experiment, real-data and methodology views render",
+    "Restart, warmup and playback controls work",
+    "Mobile viewport has no horizontal overflow",
+    "No browser exceptions and no network requests"
+  ],
+  "errors": [],
+  "network_requests": []
+}

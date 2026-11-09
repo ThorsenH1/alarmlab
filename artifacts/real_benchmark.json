@@ -1,0 +1,340 @@
+{
+  "task": "Supervised cooler degradation (<100) and exploratory pump leakage (>0) classification",
+  "tasks": [
+    "cooler_degradation",
+    "pump_leakage"
+  ],
+  "exploratory_note": "Pump leakage was added after inspecting the easy cooler task; it is not confirmatory validation.",
+  "validation_note": "The split named calibration is a validation set here. Models and threshold 0.5 are fixed; probability calibration is not performed.",
+  "data_origin": "Measured UCI 447 hydraulic test-rig data",
+  "rows": 2205,
+  "features": [
+    "TS1_mean",
+    "TS1_std",
+    "TS1_range",
+    "TS1_slope_per_cycle",
+    "TS2_mean",
+    "TS2_std",
+    "TS2_range",
+    "TS2_slope_per_cycle",
+    "TS3_mean",
+    "TS3_std",
+    "TS3_range",
+    "TS3_slope_per_cycle",
+    "TS4_mean",
+    "TS4_std",
+    "TS4_range",
+    "TS4_slope_per_cycle",
+    "FS1_mean",
+    "FS1_std",
+    "FS1_range",
+    "FS1_slope_per_cycle",
+    "FS2_mean",
+    "FS2_std",
+    "FS2_range",
+    "FS2_slope_per_cycle",
+    "VS1_mean",
+    "VS1_std",
+    "VS1_range",
+    "VS1_slope_per_cycle",
+    "PS1_mean",
+    "PS1_std",
+    "PS1_range",
+    "PS1_slope_per_cycle",
+    "PS2_mean",
+    "PS2_std",
+    "PS2_range",
+    "PS2_slope_per_cycle"
+  ],
+  "source_sha256": "87d1b579acd0920f02ded2d38c27aed591fc3dc062824054620f62854477cab3",
+  "split_design": "Disjoint full condition tuples; no identical recipe crosses splits.",
+  "split_sizes": {
+    "train": 1545,
+    "calibration": 285,
+    "test": 375
+  },
+  "split_groups": {
+    "train": 81,
+    "calibration": 27,
+    "test": 36
+  },
+  "metrics": [
+    {
+      "task": "cooler_degradation",
+      "model": "dummy_prior",
+      "split": "calibration",
+      "n": 285,
+      "positive_count": 235,
+      "balanced_accuracy": 0.5,
+      "macro_f1": 0.4519230769230769,
+      "roc_auc": 0.5,
+      "average_precision": 0.8245614035087719,
+      "confusion_matrix_tn_fp_fn_tp": [
+        0,
+        50,
+        0,
+        235
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "task": "cooler_degradation",
+      "model": "dummy_prior",
+      "split": "test",
+      "n": 375,
+      "positive_count": 274,
+      "balanced_accuracy": 0.5,
+      "macro_f1": 0.4221879815100154,
+      "roc_auc": 0.5,
+      "average_precision": 0.7306666666666667,
+      "confusion_matrix_tn_fp_fn_tp": [
+        0,
+        101,
+        0,
+        274
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "task": "cooler_degradation",
+      "model": "logistic_regression",
+      "split": "calibration",
+      "n": 285,
+      "positive_count": 235,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        50,
+        0,
+        0,
+        235
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "task": "cooler_degradation",
+      "model": "logistic_regression",
+      "split": "test",
+      "n": 375,
+      "positive_count": 274,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        101,
+        0,
+        0,
+        274
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "task": "cooler_degradation",
+      "model": "random_forest",
+      "split": "calibration",
+      "n": 285,
+      "positive_count": 235,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        50,
+        0,
+        0,
+        235
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "task": "cooler_degradation",
+      "model": "random_forest",
+      "split": "test",
+      "n": 375,
+      "positive_count": 274,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        101,
+        0,
+        0,
+        274
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "task": "pump_leakage",
+      "model": "dummy_prior",
+      "split": "calibration",
+      "n": 285,
+      "positive_count": 194,
+      "balanced_accuracy": 0.5,
+      "macro_f1": 0.24202127659574468,
+      "roc_auc": 0.5,
+      "average_precision": 0.6807017543859649,
+      "confusion_matrix_tn_fp_fn_tp": [
+        91,
+        0,
+        194,
+        0
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "task": "pump_leakage",
+      "model": "dummy_prior",
+      "split": "test",
+      "n": 375,
+      "positive_count": 204,
+      "balanced_accuracy": 0.5,
+      "macro_f1": 0.3131868131868132,
+      "roc_auc": 0.5,
+      "average_precision": 0.544,
+      "confusion_matrix_tn_fp_fn_tp": [
+        171,
+        0,
+        204,
+        0
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "task": "pump_leakage",
+      "model": "logistic_regression",
+      "split": "calibration",
+      "n": 285,
+      "positive_count": 194,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 0.9999999999999999,
+      "confusion_matrix_tn_fp_fn_tp": [
+        91,
+        0,
+        0,
+        194
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "task": "pump_leakage",
+      "model": "logistic_regression",
+      "split": "test",
+      "n": 375,
+      "positive_count": 204,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 0.9999999999999999,
+      "confusion_matrix_tn_fp_fn_tp": [
+        171,
+        0,
+        0,
+        204
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "task": "pump_leakage",
+      "model": "random_forest",
+      "split": "calibration",
+      "n": 285,
+      "positive_count": 194,
+      "balanced_accuracy": 0.9945054945054945,
+      "macro_f1": 0.9959522220170717,
+      "roc_auc": 1.0,
+      "average_precision": 0.9999999999999999,
+      "confusion_matrix_tn_fp_fn_tp": [
+        90,
+        1,
+        0,
+        194
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        0.98125,
+        1.0
+      ]
+    },
+    {
+      "task": "pump_leakage",
+      "model": "random_forest",
+      "split": "test",
+      "n": 375,
+      "positive_count": 204,
+      "balanced_accuracy": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "average_precision": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        171,
+        0,
+        0,
+        204
+      ],
+      "balanced_accuracy_group_bootstrap95": [
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "random_row_diagnostic": {
+    "purpose": "Illustrate why random cycle splitting is a weaker validation design.",
+    "model": "logistic_regression",
+    "shared_condition_groups": 139,
+    "n": 552,
+    "positive_count": 366,
+    "balanced_accuracy": 1.0,
+    "macro_f1": 1.0,
+    "roc_auc": 1.0,
+    "average_precision": 1.0,
+    "confusion_matrix_tn_fp_fn_tp": [
+      186,
+      0,
+      0,
+      366
+    ]
+  },
+  "limitations": [
+    "All cycles come from one test rig; this is not external device validation.",
+    "Condition groups do not guarantee independent acquisition sessions or remove all temporal dependence.",
+    "Labels and unstable flag are excluded from model inputs.",
+    "The cycle ends before inference: this is not an early-warning benchmark.",
+    "Probabilities are uncalibrated model outputs, not physical failure probabilities.",
+    "This supervised task does not validate the synthetic anomaly detector."
+  ]
+}

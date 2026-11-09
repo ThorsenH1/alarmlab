@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alarmlab"
+version = "0.1.0"
+description = "Human-centred anomaly monitoring: a reproducible research portfolio."
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=2.0,<3",
+  "pandas>=2.2,<3",
+  "scipy>=1.13,<2",
+  "scikit-learn>=1.5,<2",
+  "matplotlib>=3.9,<4",
+]
+
+[project.scripts]
+alarmlab = "alarmlab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+alarmlab = ["web/*.html", "web/*.css", "web/*.js"]
+
