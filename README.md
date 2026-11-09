@@ -83,6 +83,8 @@ npm run test:browser
 
 The browser dependency is needed only for automated interface checks. The demo itself contains no JavaScript dependencies.
 
+Local verification is complete. The supplied GitHub Actions workflow has not yet run remotely; see the [verification record](docs/VERIFICATION.md).
+
 For isolated work use both `--output artifacts/my-run` and `--demo artifacts/my-run/demo`. The experiment output does not overwrite source data. Existing files inside a selected output directory are regenerated.
 
 ## Read the project in order

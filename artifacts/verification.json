@@ -12,5 +12,6 @@
   "exact_repeat_prediction_hash_match": true,
   "prediction_sha256": "bf8f1a1b7a541cdefc50a4a607005b1b9e8dd23fd3ae93b0ad6dc39c4769b454",
   "wheel_built_and_web_resources_verified": true,
-  "scope": "Software and research-pipeline checks; no physical or human-performance validation."
+  "scope": "Software and research-pipeline checks; no physical or human-performance validation.",
+  "github_actions_remote_status": "not_run"
 }

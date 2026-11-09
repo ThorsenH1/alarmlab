@@ -35,7 +35,7 @@ npm run test:browser
 
 On Windows, the helper supports Demo, Setup, Run and Test. If interpreter discovery is affected by an isolated environment, supply its absolute path using -PythonPath.
 
-GitHub Actions is configured to run the numerical pipeline on Python 3.11 and 3.13, and browser checks in a separate job. Its actual status is visible in the repository's Actions tab; configuration alone is not evidence that a remote run passed.
+GitHub Actions is configured to run the numerical pipeline on Python 3.11 and 3.13, and browser checks in a separate job. At this release, those remote jobs have not run. The reported verification was performed locally. Configuration alone is not evidence that a remote run passed.
 
 ## Interpretation
 

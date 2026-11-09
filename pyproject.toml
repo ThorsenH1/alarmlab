@@ -23,4 +23,3 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 alarmlab = ["web/*.html", "web/*.css", "web/*.js"]
-

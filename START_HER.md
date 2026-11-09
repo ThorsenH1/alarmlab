@@ -32,7 +32,7 @@ Likheten med medisinsk data science ligger i problemene: korrelerte målinger, d
 
 ## Hva som er ferdig – og hva som fortsatt er forskning
 
-Programmet, demoen og standardeksperimentene er implementert og kjørt. Enhetstester og nettleserkontroller ligger ved som verifikasjon. CI-oppsettet kjører samme kode på GitHub.
+Programmet, demoen og standardeksperimentene er implementert og kjørt. Enhetstester og nettleserkontroller ligger ved som verifikasjon. CI-oppsettet er laget for å kjøre samme kode på GitHub; fjernkjøringen er foreløpig ikke gjennomført.
 
 Det er ikke gjennomført en brukerstudie, innsamlet IFE-data eller testet på et virkelig kontrollrom. Simulatoren beskriver en enkel kjølekrets, ikke et kjernekraftverk. Dokumentene skiller mellom gjennomført arbeid og foreslåtte videre undersøkelser.
 
